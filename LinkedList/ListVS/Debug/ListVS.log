@@ -1,0 +1,6 @@
+﻿  TimeTestingList.cpp
+c:\users\christian broms\source\repos\dlinkedlist\linkedlist\listvs\timetestinglist.cpp(40): warning C4309: 'static_cast': truncation of constant value
+  Fraction.cpp
+  Generating Code...
+  ListVS.vcxproj -> C:\Users\Christian Broms\Source\Repos\DLinkedList\LinkedList\Debug\ListVS.exe
+  ListVS.vcxproj -> C:\Users\Christian Broms\Source\Repos\DLinkedList\LinkedList\Debug\ListVS.pdb (Partial PDB)
