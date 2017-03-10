@@ -25,7 +25,7 @@ Here's an example using the list to store characters
 
 int main(){
 
-List<char> charList;
+NList<char> charList;
 
 charList.push_back('d');  // adds 'd'
 charList.push_back('x');  // adds 'x'
@@ -63,7 +63,7 @@ operator+ 	| combines two list objects into one		  | NList
 
 ### Section 2 - Functions with specifications
 
-The following functions require some additional specifications added to your class. See [Defining Numeric Classes](https://github.com/CBR0MS/DLinkedList#defining-numeric-classes) for more information. If they are called without the specifications, they will return false.
+The following functions require some additional specifications added to your class. See [Defining Numeric Classes](#defining-numeric-classes) for more information. If they are called without the specifications, they will return false.
 
 Function        | Description    				  | Return type
 -------------   | ----------------------------------------------- |------------
@@ -82,7 +82,7 @@ operator[]      | exact same behavior as the at function          | T
 
 ## Defining Numeric Classes
 
-In order to call functions from [Section 2](https://github.com/CBR0MS/DLinkedList#section-2---functions-with-specifications) in the `NList` class, you must define the numeric limits of your custom class. This is only necessary if the list is storing custom complex classes, not simple arithmetic ones such as `int` and `char` or even classes predefined in the standard library such as `std::string`. If your class has no easily defined limits or is not arithmetic, you cannot use any of the functions listed in [Section 2](https://github.com/CBR0MS/DLinkedList#section-2---functions-with-specifications). However, if the class has limits, you must include the following template in your class' header file. 
+In order to call functions from [Section 2](#section-2---functions-with-specifications) in the `NList` class, you must define the numeric limits of your custom class. This is only necessary if the list is storing custom complex classes, not simple arithmetic ones such as `int` and `char` or even classes predefined in the standard library such as `std::string`. If your class has no easily defined limits or is not arithmetic, you cannot use any of the functions listed in [Section 2](#section-2---functions-with-specifications). However, if the class has limits, you must include the following template in your class' header file. 
 
 ```c++
 // YOURCLASS defininitons here { ... };
@@ -95,7 +95,7 @@ public:
 	static Fraction is_specialized() { return true; };	// must return true
 };
 ```
-Once this code has been included in your class header, the functions listed in [Section 2](https://github.com/CBR0MS/DLinkedList#section-2---functions-with-specifications) become available. To see an example of this template in use, refrence `DLinkedList/LinkedList/ListVS/Fraction.hpp`. 
+Once this code has been included in your class header, the functions listed in [Section 2](#section-2---functions-with-specifications) become available. To see an example of this template in use, refrence `DLinkedList/LinkedList/ListVS/Fraction.hpp`. 
 
 ## Speed and Efficiency 
 
