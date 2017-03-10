@@ -1,22 +1,21 @@
-LinkedList
-======
+# LinkedList
 
-This list class is built on a doubly-linked list using a basic Node structure. It accepts any simple arithmetic type T or any complex class T.
 
-Examples
-------
+This `NList` class is built on a doubly-linked list using a basic node structure. It accepts any simple arithmetic type T or any complex class T.
+
+## Examples
 
 An integer list can be initalized as follows
 
 ```c++
-List<int> integerList;
+NList<int> integerList;
 ```
 
 The list is a template and can be used with any class 
 
 ```c++
 class T;
-List<T> classList;
+NList<T> classList;
 ```
 
 Here's an example using the list to store characters 
@@ -37,49 +36,68 @@ charList.displayList();
 }
 ```
 
-*Important Note*
-------
+## Public Functions
 
-For proper functionality when using this list class with any complex class T, the header file 'classLimitsDefs.hpp' must be both
-included *and* modified. This list class uses the limits template, which requires a limit definition for any non-simple arithmetic
-type or class. When using the class template with a simple arithmetic type such as an int, char, or double, there is no need to use the
-'classLimitsDefs.hpp' file. However, if you wish to use this list as a container for your own classes, include this header file and
-modify as shown below
+### Section 1 - Functions with no preconditions
 
-Modifying the Limits Template
-------
+Function        | Description    				  | Return type
+-------------   | ----------------------------------------------- |------------
+NList           | default constructor				  | void
+assign          | add a specified value to entire container       | void 
+push_back       | add a value to the back of the list             | void
+pop_back        | remove the last list value			  | void
+push_front      | add a value to the front of the list     	  | void
+pop_front       | remove the first value in the list 		  | void
+enableIndexing  | enables the use of indexing and [] operator     | void   
+disableIndexing | disables the use of indexing			  | void
+erase           | removes all instances of the passed value 	  | void
+clear           | removes the entire contents of the list	  | void
+clearAllExcept  | removes all except the passed value		  | void
+expandCapacity  | makes the capacity larger by intervals of 1000  | void
+size 		| returns the size of the list			  | int
+currentCapacity | returns the capacity of the list		  | unsigned long
+maxtCapacity 	| returns recommended max capacity of list        | unsigned long
+maxCapacity     | returns max possible capacity of the list	  | unsigned long
+isEmpty		| if the list has any contents			  | boolean
+operator+ 	| combines two list objects into one		  | NList
 
-When using a custom class type, the following must be modified to provide the list function with a max and min value. If not provided, the list could potentially skip values when calling `List::displayList()`. The values will remain in the list and acessable via the `[]` operator, but usage of this display function may not be dependable. To ensure it is, this is the template that must be edited in accordance with your class' value rage. 
+### Section 2 - Functions with specifications
+
+The following functions require some additional specifications added to your class. See [Defining Numeric Classes](##Defining Numeric Classes) for more imformation. If they are called without the specifications, they will return false.
+
+Function        | Description    				  | Return type
+-------------   | ----------------------------------------------- |------------
+displayList     | displays the entire list with std::cout	  | boolean
+sortAscending   | sort the list in ascending order                | boolean 
+SortDescending  | sort the list in descending order               | boolean
+
+### Section 3 - Functions with preconditions
+
+These functions require that indexing is enabled on your list. By default, the list does not use indexing, so it must be enabled by calling `enableIndexing`. These functions will throw an error if indexing is disabled. 
+
+Function        | Description    				  | Return type
+-------------   | ----------------------------------------------- |------------
+at              | returns the object stored at passed index	  | T
+operator[]      | exact same behavior as the at function          | T 
+
+## Defining Numeric Classes
+
+In order to call functions from [Section 2](### Section 2 - Functions with specifications) in the `NList` class, you must define the numeric limits of your custom class. This is only necessary if the list is storing custom complex classes, not simple arithmetic ones such as `int` and `char` or even classes predefined in the standard library such as `std::string`. If your class has no easily defined limits or is not arithmetic, you cannot use any of the functions listed in [Section 2](### Section 2 - Functions with specifications). However, if the class has limits, you must include the following template in your class' header file. 
 
 ```c++
-#include "YourClass.hpp"
-#include <limits>
+// YOURCLASS defininitons here { ... };
 
-template<> class std::numeric_limits<YourClass> {
-
-public:
-	static Fraction min() { return YourClass(CLASS_MIN); };
-	static Fraction max() { return YourClass(CLASS_MAX); };
-};
-```
-
-For example, a class `Fraction` of non-negative integer values would require the following initalizations:
-
-```c++
-#include "Fraction.hpp"
-#include <limits>
-
-template<> class std::numeric_limits<Fraction> {
+template<> class std::numeric_limits<YOURCLASS> {		// define numeric limits for class
 
 public:
-	static Fraction min() { return Fraction(0); };
-	static Fraction max() { return Fraction(INT_MAX); };
+	static Fraction min() { return YOURCLASSMIN; };		// define min
+	static Fraction max() { return YOURCLASSMAX; };		// define max
+	static Fraction is_specialized() { return true; };	// must return true
 };
 ```
-This very useful fraction class is provided in this repo. 
+Once this code has been included in your class header, the functions listed in [Section 2](### Section 2 - Functions with specifications) become available. To see an example of this template in use, refrence `DLinkedList/LinkedList/ListVS/Fraction.hpp`. 
 
-Speed and Efficiency 
------
+## Speed and Efficiency 
 
 This List function is designed to be efficient, faster than the Vector and List classes from the C++ standard library. Here is a comparison of the three classes and the speeds at which their common functions execute. In this output, `List` refers the linked list class from this repo, `std List` is from the C++ library, and `Vector` also comes from the library. 
 
@@ -110,8 +128,7 @@ Vector:         N/A
 
 This test file can be found in this repo at `LinkedList/List/List/TimeTestingList.cpp`. Note that indexing is enabled on the linked list, which does slow it down, and without it the speeds are even lower. 
 
-Further Customization
------
+## Further Customization
 
 If you wish to add more to your class' limits template, I recommend that you reference [this helpful resource from cplusplus.com]
 (http://www.cplusplus.com/reference/limits/numeric_limits/). Any additional functions should be added to the List class located at  `LinkedList/List/List/List.hpp`. The layout of the file is a standard template, with function declarations at the top and definitions below; define any new functions in this same manner. 
