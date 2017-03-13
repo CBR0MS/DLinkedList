@@ -1,5 +1,15 @@
-﻿  TimeTestingList.cpp
-c:\users\christian broms\source\repos\dlinkedlist\linkedlist\listvs\timetestinglist.cpp(40): warning C4309: 'static_cast': truncation of constant value
+﻿  ComplexClassTestingList.cpp
+c:\users\christian broms\source\repos\dlinkedlist\linkedlist\listvs\nlist.hpp(112): warning C4551: function call missing argument list
+  c:\users\christian broms\source\repos\dlinkedlist\linkedlist\listvs\nlist.hpp(106): note: while compiling class template member function 'NList<Fraction>::NList(void)'
+  c:\users\christian broms\source\repos\dlinkedlist\linkedlist\listvs\complexclasstestinglist.cpp(9): note: see reference to function template instantiation 'NList<Fraction>::NList(void)' being compiled
+  c:\users\christian broms\source\repos\dlinkedlist\linkedlist\listvs\complexclasstestinglist.cpp(9): note: see reference to class template instantiation 'NList<Fraction>' being compiled
+c:\users\christian broms\source\repos\dlinkedlist\linkedlist\listvs\nlist.hpp(121): warning C4551: function call missing argument list
+c:\users\christian broms\source\repos\dlinkedlist\linkedlist\listvs\nlist.hpp(163): warning C4551: function call missing argument list
+  c:\users\christian broms\source\repos\dlinkedlist\linkedlist\listvs\nlist.hpp(161): note: while compiling class template member function 'void NList<Fraction>::displayList(void)'
+  c:\users\christian broms\source\repos\dlinkedlist\linkedlist\listvs\complexclasstestinglist.cpp(15): note: see reference to function template instantiation 'void NList<Fraction>::displayList(void)' being compiled
+c:\users\christian broms\source\repos\dlinkedlist\linkedlist\listvs\nlist.hpp(176): warning C4305: 'initializing': truncation from 'Fraction (__cdecl *)(void)' to 'bool'
+  Generating Code...
+  Compiling...
   Fraction.cpp
   Generating Code...
   ListVS.vcxproj -> C:\Users\Christian Broms\Source\Repos\DLinkedList\LinkedList\Debug\ListVS.exe

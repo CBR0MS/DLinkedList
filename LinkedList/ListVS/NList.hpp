@@ -21,9 +21,10 @@
 #include <iostream>
 #include <limits>
 #include <list>
+#include <assert.h>
 
-#ifndef List_hpp
-#define List_hpp
+#ifndef LIST_HPP
+#define LIST_HPP
 
 template<class T> class NList {
 
@@ -93,6 +94,7 @@ private:
 	unsigned long CLASS_SIZE = sizeof(T);
 	unsigned long MAX_SIZE_OF_LIST;
 
+
 	/***** PRIVATE HELPER FUNCTIONS *****/
 
 	void calcMemReqs();
@@ -106,10 +108,22 @@ template<class T> NList<T>::NList() {
 	hPtr = new Node;
 	tPtr = new Node;
 	hPtr->llink = nullptr;
-	hPtr->data = std::numeric_limits<T>::min();
+
+	if (std::numeric_limits<T>::is_specialized) {
+		hPtr->data = std::numeric_limits<T>::min();
+	}
+	else {
+		hPtr->data = T();
+	}
 	hPtr->rlink = tPtr;
 	tPtr->llink = hPtr;
-	tPtr->data = std::numeric_limits<T>::max();
+
+	if (std::numeric_limits<T>::is_specialized) {
+		tPtr->data = std::numeric_limits<T>::max();
+	}
+	else {
+		tPtr->data = T();
+	}
 	tPtr->rlink = nullptr;
 	calcMemReqs();
 }
@@ -146,19 +160,45 @@ template<class T> bool NList<T>::isEmpty() {
 
 template<class T> void NList<T>::displayList() {
 
-	mPtr = hPtr;
+	if (std::numeric_limits<T>::is_specialized) {
 
-	while (mPtr != nullptr) {
+		mPtr = hPtr;
 
-		if (mPtr->data != std::numeric_limits<T>::max() && mPtr->data != std::numeric_limits<T>::min()) {
-			std::cout << mPtr->data << ' ';
+		while (mPtr != nullptr) {
+
+			if (mPtr->data != std::numeric_limits<T>::max() && mPtr->data != std::numeric_limits<T>::min()) {
+				std::cout << mPtr->data << ' ';
+			}
+			mPtr = mPtr->rlink;
 		}
-		mPtr = mPtr->rlink;
+	}
+	else {
+		static_assert(std::numeric_limits<T>::is_specialized, "ERROR: cannot display list without class<T> numeric limits");
 	}
 }
 
 template<class T> T NList<T>::at(const int& index) {
-	return arrInd[index]->data;
+
+	if (indexing) {
+		return arrInd[index]->data;
+	}
+	else {
+		constexpr bool FAILURE = false;
+		static_assert(FAILURE, "ERROR: indexing must be enabled for use of NList::at()");
+	}
+}
+
+/***** OPERATORS *****/
+
+template<class T> T NList<T>::operator[](const int& index) {
+
+	if (indexing) {
+		return arrInd[index]->data;
+	}
+	else {
+		constexpr bool FAILURE = false;
+		static_assert(FAILURE, "ERROR: indexing must be enabled for use of NList::operator[]");
+	}
 }
 
 /***** MUTATORS *****/
@@ -301,19 +341,14 @@ template<class T> void NList<T>::clearAllExcept(const T& keepVal) {
 
 template<class T> void NList<T>::expandCapacity() {
 
+	
+
 	if (m_workingCapacity + 1000 < m_maxCapacity) {
 		m_workingCapacity += 1000;
 	}
-	else if (m_workingCapacity + 1000 >= m_maxCapacity) {
-
-		if (m_workingCapacity >= m_maxCapacity) {
-			// error, too large
-			return;
-		}
-		else {
-			unsigned long i = m_maxCapacity - m_workingCapacity;
-			m_workingCapacity += i;
-		}
+	else  {
+		constexpr bool FAILURE = false;
+		static_assert(FAILURE, "ERROR: Capacity of list cannot exceed capacity defined in NList::maxCapacity()");
 	}
 	firstIndexSet = false;
 	refreshIndex();
@@ -324,6 +359,7 @@ template<class T> void NList<T>::expandCapacity() {
 template<class T> void NList<T>::refreshIndex() {
 
 	if (!firstIndexSet) {
+		arrInd = nullptr;
 		arrInd = new Node*[m_workingCapacity];
 		firstIndexSet = true;
 	}
@@ -341,19 +377,10 @@ template<class T> void NList<T>::calcMemReqs() {
 	unsigned long MAX_SIZE_OF_LIST = tempList.max_size();
 	m_maxtCapacity = MAX_SIZE_OF_LIST / (NODE_SIZE + CLASS_SIZE);
 
-	if (m_maxtCapacity > 100000000) {
-		m_maxCapacity = (MAX_SIZE_OF_LIST / (NODE_SIZE + CLASS_SIZE)) / DIVISOR;
+	if (m_maxtCapacity > 100000) {
+		m_maxtCapacity = 1000000;
 	}
-	else {
-		m_maxCapacity = m_maxtCapacity;
-	}
+	m_maxCapacity = 10000;
 }
 
-/***** OPERATORS *****/
-
-template<class T> T NList<T>::operator[](const int& index) {
-
-	return arrInd[index]->data;
-}
-
-#endif /* List_hpp */
+#endif /* LIST_HPP */

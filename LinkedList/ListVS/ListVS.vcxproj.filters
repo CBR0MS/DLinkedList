@@ -38,5 +38,8 @@
     <ClCompile Include="TimeTestingList.cpp">
       <Filter>Source Files\ListClassTests</Filter>
     </ClCompile>
+    <ClCompile Include="ComplexClassTestingList.cpp">
+      <Filter>Source Files\ListClassTests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -143,6 +143,7 @@
     <ClInclude Include="NList.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ComplexClassTestingList.cpp" />
     <ClCompile Include="Fraction.cpp" />
     <ClCompile Include="TimeTestingList.cpp" />
   </ItemGroup>

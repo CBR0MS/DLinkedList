@@ -19,8 +19,8 @@
 #include <iostream>
 #include <limits>
 
-#ifndef Fraction_hpp
-#define Fraction_hpp
+#ifndef FRACTION_HPP
+#define FRACTION_HPP
 
 class Fraction
 {
@@ -77,13 +77,16 @@ private:
 
 };
 
+// adding the limits template and specifying max, min and specialized
+// see the README.md for more information
+
 template<> class std::numeric_limits<Fraction> {			// define numeric limits for class
 
 public:
 	static Fraction min() { return Fraction(0); };			// define min
-	static Fraction max() { return Fraction(INT_MAX); };	// define max
+	static Fraction max() { return Fraction(INT_MAX); };		// define max
 	static Fraction is_specialized() { return true; };		// must return true
 
 };
 
-#endif /* Fraction_hpp */
+#endif /* FRACTION_HPP */
