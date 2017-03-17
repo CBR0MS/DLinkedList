@@ -38,7 +38,7 @@ charList.displayList();	  // display the list
 
 ## Indexing
 
-The `NList` class allows the use of indexing through `operator[](const int* index)`. Passing an index to this function will return the data stored at that position in the list. The list uses a standard indexing system starting with index 0. Note that by default, indexing is *disabled*, and must be manually set on in order to use functions listed in [Section 2](#section-2---functions-with-specifications). To enable indexing, call the void function `NList::enableIndexing()`. 
+The `NList` class allows the use of indexing through `operator[](const int* index)`. Passing an index to this function will return the data stored at that position in the list. The list uses a standard indexing system starting with index 0. Note that by default, indexing is *disabled*, and must be manually set on in order to use functions listed in [Section 2](#section-3---functions-with-preconditions). To enable indexing, call the void function `NList::enableIndexing()`. 
 
 ### Performance and Efficiency with Indexing
 
