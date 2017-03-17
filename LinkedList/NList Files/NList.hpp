@@ -1,18 +1,25 @@
-// File: List.hpp
-// Compiler: MS Visual Studio 2015
+// File: NList.hpp
+// Compilers Used: MS Visual Studio 2015 && Xcode 8.2.1
 // Created by Christian Broms on 2/23/17
 
 /* CLASS INFORMATION:
-*
-* This list class is built on a doubly-linked list using
-* a basic Node structure. It accepts any simple
-* arithmetic type T or any complex class T.
-*
-* For proper functionality when using this list class with
-* any complex class T, a limit template should be included in
-* the class' header. Instructions for adding this template
-* are in the README.md.
-*/
+ *
+ * This list class is built on a doubly-linked list using
+ * a basic Node structure. It accepts any simple
+ * arithmetic type T or any complex class T.
+ *
+ * For proper functionality when using this list class with
+ * any complex class T, a limit template should be included in
+ * the class' header. Instructions for adding this template
+ * are in the README.md.
+ *
+ * OTHER INFORMATION:
+ *
+ * This file and all others found with it are a part of the public
+ * repository that can be found at https://github.com/CBR0MS/DLinkedList
+ * Licensed with the MIT License. 
+ *
+ */
 
 // TODO: index 0 returns the dummy node, not an acctual value
 // TODO: finish sort and swap mutators
@@ -85,6 +92,8 @@ private:
 	int m_size = 0;
 	bool firstIndexSet = false;
 	bool indexing = false;
+    static constexpr bool DNTEXC = false;
+
 
 	unsigned long m_workingCapacity = 1000;
 	unsigned long m_maxCapacity;
@@ -183,7 +192,6 @@ template<class T> T NList<T>::at(const int& index) {
 		return arrInd[index]->data;
 	}
 	else {
-		constexpr bool DNTEXC = false;
 		static_assert(DNTEXC, "ERROR: indexing must be enabled for use of NList::at()");
 	}
 }
@@ -196,8 +204,7 @@ template<class T> T NList<T>::operator[](const int& index) {
 		return arrInd[index]->data;
 	}
 	else {
-		constexpr bool DNTEXC = false;
-		static_assert(DNTEXC, "ERROR: indexing must be enabled for use of NList::operator[]");
+        static_assert(DNTEXC, "ERROR: indexing must be enabled for use of NList::operator[]");
 	}
 }
 
@@ -341,13 +348,10 @@ template<class T> void NList<T>::clearAllExcept(const T& keepVal) {
 
 template<class T> void NList<T>::expandCapacity() {
 
-	
-
 	if (m_workingCapacity + 1000 < m_maxCapacity) {
 		m_workingCapacity += 1000;
 	}
 	else  {
-		constexpr bool DNTEXC = false;
 		static_assert(DNTEXC, "ERROR: Capacity of list cannot exceed capacity defined in NList::maxCapacity()");
 	}
 	firstIndexSet = false;
@@ -383,4 +387,4 @@ template<class T> void NList<T>::calcMemReqs() {
 	m_maxCapacity = 10000;
 }
 
-#endif /* LIST_HPP */
+#endif /* NLIST_HPP */
