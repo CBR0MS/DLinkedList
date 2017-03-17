@@ -18,7 +18,7 @@ class T;
 NList<T> classList;
 ```
 
-Here's an example using the list to store characters 
+Using the list to store characters
 
 ```c++
 #include "List.hpp"
@@ -32,11 +32,21 @@ charList.push_back('x');  // adds 'x'
 charList.push_front('a'); // adds 'a'
 charList.pop_back();      // removes 'x'
 
-charList.displayList();
+charList.displayList();	  // display the list
 }
 ```
 
+## Indexing
+
+The `NList` class allows the use of indexing through `operator[](const int* index)`. Passing an index to this function will return the data stored at that position in the list. The list uses a standard indexing system starting with index 0. Note that by default, indexing is *disabled*, and must be manually set on in order to use functions listed in [Section 2](#section-3---functions-with-preconditions). To enable indexing, call the void function `NList::enableIndexing()`. 
+
+### Performance and Efficiency with Indexing
+
+When indexing is enabled, adding and removing values from the list will be slower, as the indecies must be updated on every call. The `NList` uses a secondary dynamic array to store pointers, and whenever a node is added to the list, the array must be updated. When adding and removing values from the list, it is recommended that `NList::push_back()` and `NList::pop_back()` are used, as they will complete faster due to the nature of updating the index array. If the use of indexing is not desired, ensure that `NList::enableIndexing()` is never called, as it will slow down the list process consiterably. If the use of indexing is no longer needed partway through a program, it can be disabled with `NList::disableIndexing()`. To see a speed comparison of the `NList` and other dynamic containers in C++ reference [Speed and Efficiency](#speed-and-efficiency). 
+
+
 ## Public Functions
+
 
 ### Section 1 - Functions with no preconditions
 
@@ -61,6 +71,7 @@ maxCapacity     | returns max possible capacity of the list	  | unsigned long
 isEmpty		| if the list has any contents			  | boolean
 operator+ 	| combines two list objects into one		  | NList
 
+
 ### Section 2 - Functions with specifications
 
 The following functions require some additional specifications added to your class. See [Defining Numeric Classes](#defining-numeric-classes) for more information. If they are called without the specifications, they will return false.
@@ -71,6 +82,7 @@ displayList     | displays the entire list with std::cout	  | boolean
 sortAscending   | sort the list in ascending order                | boolean 
 SortDescending  | sort the list in descending order               | boolean
 
+
 ### Section 3 - Functions with preconditions
 
 These functions require that indexing is enabled on your list. By default, the list does not use indexing, so it must be enabled by calling `enableIndexing`. These functions will throw an error if indexing is disabled. 
@@ -79,6 +91,7 @@ Function        | Description    				  | Return type
 -------------   | ----------------------------------------------- |------------
 at              | returns the object stored at passed index	  | T
 operator[]      | exact same behavior as the at function          | T 
+
 
 ## Defining Numeric Classes
 
@@ -96,6 +109,7 @@ public:
 };
 ```
 Once this code has been included in your class header, the functions listed in [Section 2](#section-2---functions-with-specifications) become available. To see an example of this template in use, refrence `DLinkedList/LinkedList/ListVS/Fraction.hpp`. 
+
 
 ## Speed and Efficiency 
 
