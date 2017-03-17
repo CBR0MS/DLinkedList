@@ -1,17 +1,23 @@
-// File: TimeTestingList.cpp
-// Aditional File: List.hpp
-// Compiler: MS Visual Studio 2015
+// File: TESTM_NListTime.cpp
+// Aditional Required File(s): NList.hpp
+// Compilers Used: MS Visual Studio 2015 & Xcode 8.2.1
 // Created by Christian Broms on 3/08/17
 
 /* FILE DESCRIPTION:
-*
-* This file compares the speeds of the List class to both the
-* vector and list in the C++ standard library. Times are measured in
-* microseconds using the high resolution clock and will vary from
-* each excecution and computer due to changes in processor speed and
-* background processes. Sample output in the README.md
-*
-*/
+ *
+ * This file compares the speeds of the List class to both the
+ * vector and list in the C++ standard library. Times are measured in
+ * microseconds using the high resolution clock and will vary from
+ * each excecution and computer due to changes in processor speed and
+ * background processes. Sample output in the README.md
+ *
+ * OTHER INFORMATION:
+ *
+ * This file and all others found with it are a part of the public
+ * repository that can be found at https://github.com/CBR0MS/DLinkedList
+ * Licensed with the MIT License.
+ *
+ */
 
 #include <iostream>
 #include <chrono>
