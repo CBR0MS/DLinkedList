@@ -1,9 +1,19 @@
-// Filename: Fraction.cpp
-// Additional Files: Fraction.hpp
+// File: Fraction.cpp
+// Additional Required File(s): Fraction.hpp
+// Compilers Used: MS Visual Studio 2015 && Xcode 8.2.1
 // Created by Christian Broms on 2/20/17
-// Compiler: MS Visual Studio 2015
 
-// See 'Fraction.hpp' for class information
+/* CLASS INFORMATION:
+ *
+ * See 'Fraction.hpp' for class information
+ *
+ * OTHER INFORMATION:
+ *
+ * This file and all others found with it are a part of the public
+ * repository that can be found at https://github.com/CBR0MS/DLinkedList
+ * Licensed with the MIT License.
+ *
+ */
 
 #include "Fraction.hpp"
 #include <iostream>
