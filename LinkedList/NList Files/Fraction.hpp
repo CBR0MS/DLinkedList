@@ -1,20 +1,26 @@
-// Filename: Fraction.hpp
-// Additional Files: Fraction.cpp
+// File: Fraction.hpp
+// Additional Required File(s): Fraction.cpp
+// Compilers Used: MS Visual Studio 2015 && Xcode 8.2.1
 // Created by Christian Broms on 2/20/17
-// Compiler: MS Visual Studio 2015
 
 /* CLASS INFORMATION:
-*
-* This class is designed to hold a fraction, using two
-* distinct integer values. All augmented assignments, streams,
-* comparison, and arithmetic operators have been overloaded to
-* allow easier usage of fraction objects. Fractions are easily
-* declared and initiated, this class with accept one or two parameters
-* and construct a fraction. Be aware that when printing the fraction
-* object, it is automatically simplified, but it is always stored
-* in a non simplified manner.
-*
-*/
+ *
+ * This class is designed to hold a fraction, using two
+ * distinct integer values. All augmented assignments, streams,
+ * comparison, and arithmetic operators have been overloaded to
+ * allow easier usage of fraction objects. Fractions are easily
+ * declared and initiated, this class with accept one or two parameters
+ * and construct a fraction. Be aware that when printing the fraction
+ * object, it is automatically simplified, but it is always stored
+ * in a non simplified manner.
+ *
+ * OTHER INFORMATION:
+ *
+ * This file and all others found with it are a part of the public
+ * repository that can be found at https://github.com/CBR0MS/DLinkedList
+ * Licensed with the MIT License.
+ *
+ */
 
 #include <iostream>
 #include <limits>
