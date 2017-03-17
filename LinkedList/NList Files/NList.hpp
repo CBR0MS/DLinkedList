@@ -44,6 +44,11 @@ public:
 	bool isEmpty();
 	void displayList();
 	T at(const int& index);
+    
+    /***** OPERATORS *****/
+    
+    //	friend List operator+(const List& lhs, const List& rhs);
+    T operator[](const int& index);
 
 	/***** MUTATORS *****/
 
@@ -61,11 +66,6 @@ public:
 	//   void swap(List& l1, List& l2);  // TODO: build it
 	void clear();
 	void clearAllExcept(const T& keepVal);
-
-	/***** OPERATORS *****/
-
-	//	friend List operator+(const List& lhs, const List& rhs);
-	T operator[](const int& index);
 
 private:
 
@@ -183,8 +183,8 @@ template<class T> T NList<T>::at(const int& index) {
 		return arrInd[index]->data;
 	}
 	else {
-		constexpr bool FAILURE = false;
-		static_assert(FAILURE, "ERROR: indexing must be enabled for use of NList::at()");
+		constexpr bool DNTEXC = false;
+		static_assert(DNTEXC, "ERROR: indexing must be enabled for use of NList::at()");
 	}
 }
 
@@ -196,8 +196,8 @@ template<class T> T NList<T>::operator[](const int& index) {
 		return arrInd[index]->data;
 	}
 	else {
-		constexpr bool FAILURE = false;
-		static_assert(FAILURE, "ERROR: indexing must be enabled for use of NList::operator[]");
+		constexpr bool DNTEXC = false;
+		static_assert(DNTEXC, "ERROR: indexing must be enabled for use of NList::operator[]");
 	}
 }
 
@@ -347,8 +347,8 @@ template<class T> void NList<T>::expandCapacity() {
 		m_workingCapacity += 1000;
 	}
 	else  {
-		constexpr bool FAILURE = false;
-		static_assert(FAILURE, "ERROR: Capacity of list cannot exceed capacity defined in NList::maxCapacity()");
+		constexpr bool DNTEXC = false;
+		static_assert(DNTEXC, "ERROR: Capacity of list cannot exceed capacity defined in NList::maxCapacity()");
 	}
 	firstIndexSet = false;
 	refreshIndex();
