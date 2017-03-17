@@ -92,8 +92,7 @@ private:
 	int m_size = 0;
 	bool firstIndexSet = false;
 	bool indexing = false;
-    static constexpr bool DNTEXC = false;
-
+	bool overCap = false;
 
 	unsigned long m_workingCapacity = 1000;
 	unsigned long m_maxCapacity;
@@ -192,7 +191,7 @@ template<class T> T NList<T>::at(const int& index) {
 		return arrInd[index]->data;
 	}
 	else {
-		static_assert(DNTEXC, "ERROR: indexing must be enabled for use of NList::at()");
+		assert(("ERROR: indexing must be enabled for use of NList::operator[]", indexing));
 	}
 }
 
@@ -204,7 +203,7 @@ template<class T> T NList<T>::operator[](const int& index) {
 		return arrInd[index]->data;
 	}
 	else {
-        static_assert(DNTEXC, "ERROR: indexing must be enabled for use of NList::operator[]");
+		assert(("ERROR: indexing must be enabled for use of NList::operator[]", indexing));
 	}
 }
 
@@ -352,7 +351,7 @@ template<class T> void NList<T>::expandCapacity() {
 		m_workingCapacity += 1000;
 	}
 	else  {
-		static_assert(DNTEXC, "ERROR: Capacity of list cannot exceed capacity defined in NList::maxCapacity()");
+		assert(("ERROR: Capacity of list cannot exceed capacity defined in NList::maxCapacity()", overCap));
 	}
 	firstIndexSet = false;
 	refreshIndex();
