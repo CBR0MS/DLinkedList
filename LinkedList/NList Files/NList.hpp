@@ -21,10 +21,6 @@
  *
  */
 
-// TODO: index 0 returns the dummy node, not an acctual value
-// TODO: finish sort and swap mutators
-// TODO: build operator+
-
 #include <iostream>
 #include <limits>
 #include <list>
@@ -68,12 +64,11 @@ public:
 	void disableIndexing();
 	void erase(const T& p_eraseItem);
 	void expandCapacity();
-	//   void sortAscending();           // TODO: define ref to sort by if complex class
-	//   void sortDescending();          // TODO: " "
-	//   void swap(List& l1, List& l2);  // TODO: build it
+	void sortAscending();
+	void sortDescending();
 	void clear();
 	void clearAllExcept(const T& keepVal);
-
+	
 private:
 
 	struct Node {
@@ -87,8 +82,8 @@ private:
 	Node* tPtr = nullptr;
 	Node* mPtr = nullptr;
 	Node* temp = nullptr;
-
 	Node** arrInd = nullptr;
+	
 	int m_size = 0;
 	bool firstIndexSet = false;
 	bool indexing = false;
@@ -104,7 +99,8 @@ private:
 
 
 	/***** PRIVATE HELPER FUNCTIONS *****/
-
+	
+	void bubbleSort(NList<T>::Node* arr[], int arrSize, bool desc);
 	void calcMemReqs();
 	void refreshIndex();
 };
@@ -119,8 +115,8 @@ template<class T> NList<T>::NList() {
 
 	if (std::numeric_limits<T>::is_specialized) {
 		hPtr->data = std::numeric_limits<T>::min();
-	}
-	else {
+		
+	} else {
 		hPtr->data = T();
 	}
 	hPtr->rlink = tPtr;
@@ -128,8 +124,8 @@ template<class T> NList<T>::NList() {
 
 	if (std::numeric_limits<T>::is_specialized) {
 		tPtr->data = std::numeric_limits<T>::max();
-	}
-	else {
+		
+	} else {
 		tPtr->data = T();
 	}
 	tPtr->rlink = nullptr;
@@ -162,8 +158,8 @@ template<class T> bool NList<T>::isEmpty() {
 
 	if (m_size == 0) {
 		return true;
-	}
-	else { return false; }
+		
+	} else { return false; }
 }
 
 template<class T> void NList<T>::displayList() {
@@ -179,8 +175,8 @@ template<class T> void NList<T>::displayList() {
 			}
 			mPtr = mPtr->rlink;
 		}
-	}
-	else {
+		
+	} else {
 		static_assert(std::numeric_limits<T>::is_specialized, "ERROR: cannot display list without class<T> numeric limits");
 	}
 }
@@ -189,9 +185,10 @@ template<class T> T NList<T>::at(const int& index) {
 
 	if (indexing) {
 		return arrInd[index]->data;
-	}
-	else {
+		
+	} else {
 		assert(("ERROR: indexing must be enabled for use of NList::operator[]", indexing));
+		return T();
 	}
 }
 
@@ -201,9 +198,10 @@ template<class T> T NList<T>::operator[](const int& index) {
 
 	if (indexing) {
 		return arrInd[index]->data;
-	}
-	else {
+		
+	} else {
 		assert(("ERROR: indexing must be enabled for use of NList::operator[]", indexing));
+		return T();
 	}
 }
 
@@ -213,8 +211,8 @@ template<class T> void NList<T>::assign(const T& p_newValue) {
 
 	if (m_size < 1) {
 		push_back(p_newValue);
-	}
-	else {
+		
+	} else {
 		mPtr = hPtr->rlink;
 
 		while (mPtr->rlink != nullptr) {
@@ -255,9 +253,9 @@ template<class T> void NList<T>::push_back(const T& p_newValue) {
 
 		if (!firstIndexSet) {
 			refreshIndex();
-		}
-		else {
-			arrInd[m_size] = temp;
+			
+		} else {
+			arrInd[m_size - 1] = temp;
 		}
 	}
 }
@@ -304,6 +302,7 @@ template<class T> void NList<T>::erase(const T& p_eraseItem) {
 	for (int i = 0; i < m_size + 1; i++) {
 
 		if (mPtr->data == p_eraseItem) {
+			
 			mPtr->llink->rlink = mPtr->rlink;
 			mPtr->rlink->llink = mPtr->llink;
 			m_size--;
@@ -345,12 +344,55 @@ template<class T> void NList<T>::clearAllExcept(const T& keepVal) {
 	refreshIndex();
 }
 
-template<class T> void NList<T>::expandCapacity() {
+template<class T> void NList<T>::sortAscending(){
+	
+	if (std::numeric_limits<T>::is_specialized){
+		
+		if(!indexing){
+			refreshIndex();
+		}
+		bubbleSort(arrInd, m_size, false);
+		mPtr = hPtr;
+		
+		for (int i = 0; i < m_size; i++) {
+			
+			mPtr = mPtr->rlink;
+			mPtr->data = arrInd[i]->data;
+		}
+		refreshIndex();
+		
+	} else {
+		
+		static_assert(std::numeric_limits<T>::is_specialized, "ERROR: cannot sort list without class<T> numeric limits");
+	}
+}
+template<class T> void NList<T>::sortDescending(){
+	
+	if (std::numeric_limits<T>::is_specialized){
+		
+		if(!indexing){
+			refreshIndex();
+		}
+		bubbleSort(arrInd, m_size, true);
+		mPtr = hPtr;
+		
+		for (int i = 0; i < m_size; i++) {
+			
+			mPtr = mPtr->rlink;
+			mPtr->data = arrInd[i]->data;
+		}
+		refreshIndex();
+		
+	} else {
+		
+		static_assert(std::numeric_limits<T>::is_specialized, "ERROR: cannot sort list without class<T> numeric limits");
+	}
+}template<class T> void NList<T>::expandCapacity() {
 
 	if (m_workingCapacity + 1000 < m_maxCapacity) {
 		m_workingCapacity += 1000;
-	}
-	else  {
+		
+	} else  {
 		assert(("ERROR: Capacity of list cannot exceed capacity defined in NList::maxCapacity()", overCap));
 	}
 	firstIndexSet = false;
@@ -358,6 +400,31 @@ template<class T> void NList<T>::expandCapacity() {
 }
 
 /***** PRIVATE HELPER FUNCTIONS *****/
+
+template<class T> void NList<T>::bubbleSort(NList<T>::Node* arr[], int arrSize, bool desc){
+	
+	if (arrSize == 1) {
+		return;
+		
+	} else {
+		
+		for (int i = 0; i < arrSize - 1; i++) {
+			
+			if (desc){
+				
+				if (arr[i + 1]->data > arr[i]->data) {
+					std::swap(arr[i]->data, arr[i + 1]->data);
+				}
+			} else {
+				
+				if (arr[i + 1]->data < arr[i]->data) {
+					std::swap(arr[i]->data, arr[i + 1]->data);
+				}
+			}
+		}
+		bubbleSort(arr, arrSize - 1, desc);
+	}
+}
 
 template<class T> void NList<T>::refreshIndex() {
 
@@ -368,8 +435,8 @@ template<class T> void NList<T>::refreshIndex() {
 	}
 	mPtr = hPtr->rlink;
 
-	for (int i = 0; i < m_size + 1; i++) {
-		arrInd[i - 1] = mPtr;
+	for (int i = 0; i < m_size; i++) {
+		arrInd[i] = mPtr;
 		mPtr = mPtr->rlink;
 	}
 }

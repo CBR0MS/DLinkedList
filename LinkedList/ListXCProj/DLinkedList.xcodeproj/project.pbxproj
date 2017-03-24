@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		471CA2F91E79B2CD00E6BDE3 /* ComplexClassTestingList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 471CA2F41E79B2CD00E6BDE3 /* ComplexClassTestingList.cpp */; };
 		471CA2FA1E79B2CD00E6BDE3 /* Fraction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 471CA2F51E79B2CD00E6BDE3 /* Fraction.cpp */; };
-		471CA2FB1E79B2CD00E6BDE3 /* TimeTestingList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 471CA2F81E79B2CD00E6BDE3 /* TimeTestingList.cpp */; };
+		4767DEFB1E85876F00504671 /* TESTM_NListCompClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4767DEF91E85876F00504671 /* TESTM_NListCompClass.cpp */; };
+		4767DEFC1E85876F00504671 /* TESTM_NListTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4767DEFA1E85876F00504671 /* TESTM_NListTime.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,11 +26,11 @@
 
 /* Begin PBXFileReference section */
 		471CA2E21E79B1AE00E6BDE3 /* DLinkedList */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DLinkedList; sourceTree = BUILT_PRODUCTS_DIR; };
-		471CA2F41E79B2CD00E6BDE3 /* ComplexClassTestingList.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ComplexClassTestingList.cpp; path = "../NList Files/ComplexClassTestingList.cpp"; sourceTree = "<group>"; };
 		471CA2F51E79B2CD00E6BDE3 /* Fraction.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Fraction.cpp; path = "../NList Files/Fraction.cpp"; sourceTree = "<group>"; };
 		471CA2F61E79B2CD00E6BDE3 /* Fraction.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Fraction.hpp; path = "../NList Files/Fraction.hpp"; sourceTree = "<group>"; };
-		471CA2F71E79B2CD00E6BDE3 /* NList.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = NList.hpp; path = "../NList Files/NList.hpp"; sourceTree = "<group>"; };
-		471CA2F81E79B2CD00E6BDE3 /* TimeTestingList.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = TimeTestingList.cpp; path = "../NList Files/TimeTestingList.cpp"; sourceTree = "<group>"; };
+		471CA2F71E79B2CD00E6BDE3 /* NList.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = NList.hpp; path = "../NList Files/NList.hpp"; sourceTree = "<group>"; usesTabs = 1; };
+		4767DEF91E85876F00504671 /* TESTM_NListCompClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TESTM_NListCompClass.cpp; path = "../NList Files/TESTM_NListCompClass.cpp"; sourceTree = "<group>"; };
+		4767DEFA1E85876F00504671 /* TESTM_NListTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TESTM_NListTime.cpp; path = "../NList Files/TESTM_NListTime.cpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,11 +47,11 @@
 		471CA2D91E79B1AE00E6BDE3 = {
 			isa = PBXGroup;
 			children = (
-				471CA2F41E79B2CD00E6BDE3 /* ComplexClassTestingList.cpp */,
+				4767DEF91E85876F00504671 /* TESTM_NListCompClass.cpp */,
+				4767DEFA1E85876F00504671 /* TESTM_NListTime.cpp */,
 				471CA2F51E79B2CD00E6BDE3 /* Fraction.cpp */,
 				471CA2F61E79B2CD00E6BDE3 /* Fraction.hpp */,
 				471CA2F71E79B2CD00E6BDE3 /* NList.hpp */,
-				471CA2F81E79B2CD00E6BDE3 /* TimeTestingList.cpp */,
 				471CA2E31E79B1AE00E6BDE3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -121,8 +121,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				471CA2FB1E79B2CD00E6BDE3 /* TimeTestingList.cpp in Sources */,
-				471CA2F91E79B2CD00E6BDE3 /* ComplexClassTestingList.cpp in Sources */,
+				4767DEFB1E85876F00504671 /* TESTM_NListCompClass.cpp in Sources */,
+				4767DEFC1E85876F00504671 /* TESTM_NListTime.cpp in Sources */,
 				471CA2FA1E79B2CD00E6BDE3 /* Fraction.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

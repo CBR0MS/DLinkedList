@@ -5,11 +5,19 @@
 
 /* FILE DESCRIPTION:
  *
- * This file compares the speeds of the List class to both the
+ * There are several tests to run in this file. To change the test 
+ * number, change the define macro. 
+ *
+ * TEST 1:
+ * This test compares the speeds of the List class to both the
  * vector and list in the C++ standard library. Times are measured in
  * microseconds using the high resolution clock and will vary from
  * each excecution and computer due to changes in processor speed and
  * background processes. Sample output in the README.md
+ *
+ * TEST 2:
+ * This test makes use of a complex fraction class to test indexing 
+ * on the NList, as well as printing out the complex class.
  *
  * OTHER INFORMATION:
  *
@@ -25,9 +33,15 @@
 #include <vector>
 #include <list>
 #include "NList.hpp"
+#include "Fraction.hpp"
 
 using namespace std;
 using namespace std::chrono;
+
+// change the test # here -
+#define test 2
+
+#if test == 1
 
 int main() {
 
@@ -166,7 +180,7 @@ int main() {
 	cout << "Vector: \tN/A \n";
 
 	// testing time for pop_front function on all 
-	// removing 50 integers to the lists
+	// removing 50 integers from the lists
 
 	cout << "\nTEST 4: pop_front 50 integer objects\n";
 
@@ -201,3 +215,27 @@ int main() {
 	return 0;
 }
 
+#elif test == 2
+    
+    int main() {
+        
+        NList<Fraction> fracList;
+        Fraction f1(5, 9);
+        Fraction f2(8, 9);
+        
+        fracList.push_front(f1);
+        fracList.push_front(f1);
+        fracList.push_front(f2);
+        fracList.push_front(f1);
+        fracList.enableIndexing();
+        
+        fracList.sortAscending();
+        
+        cout <<  fracList.at(3);
+        
+      //  fracList.displayList();
+        
+        return 0;
+}
+
+#endif
