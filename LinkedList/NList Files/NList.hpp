@@ -113,7 +113,7 @@ template<class T> NList<T>::NList() {
 	tPtr = new Node;
 	hPtr->llink = nullptr;
 
-	if (std::numeric_limits<T>::is_specialized) {
+	if (&std::numeric_limits<T>::is_specialized) {
 		hPtr->data = std::numeric_limits<T>::min();
 		
 	} else {
@@ -122,7 +122,7 @@ template<class T> NList<T>::NList() {
 	hPtr->rlink = tPtr;
 	tPtr->llink = hPtr;
 
-	if (std::numeric_limits<T>::is_specialized) {
+	if (&std::numeric_limits<T>::is_specialized) {
 		tPtr->data = std::numeric_limits<T>::max();
 		
 	} else {
@@ -346,7 +346,7 @@ template<class T> void NList<T>::clearAllExcept(const T& keepVal) {
 
 template<class T> void NList<T>::sortAscending(){
 	
-	if (std::numeric_limits<T>::is_specialized){
+	if (&std::numeric_limits<T>::is_specialized){
 		
 		if(!indexing){
 			refreshIndex();
