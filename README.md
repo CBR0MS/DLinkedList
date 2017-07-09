@@ -1,7 +1,7 @@
 # LinkedList
 
 
-This `NList` class is built on a doubly-linked list using a basic node structure. It accepts any simple arithmetic type T or any complex class T.
+This `NList` class is built on a doubly-linked list using a basic node structure. It accepts any simple arithmetic type T or any complex class T. It is designed to be faster than the `std::Vector` and `std::List` classes in the C++ standard library.
 
 ## Examples
 
@@ -14,8 +14,8 @@ NList<int> integerList;
 The list is a template and can be used with any class 
 
 ```c++
-class T;
-NList<T> classList;
+class anyClass;
+NList<anyClass> classList;
 ```
 
 Using the list to store characters
@@ -38,7 +38,7 @@ charList.displayList();	  // display the list
 
 ## Indexing
 
-The `NList` class allows the use of indexing through `operator[](const int* index)`. Passing an index to this function will return the data stored at that position in the list. The list uses a standard indexing system starting with index 0. Note that by default, indexing is *disabled*, and must be manually set on in order to use functions listed in [Section 2](#section-3---functions-with-preconditions). To enable indexing, call the void function `NList::enableIndexing()`. 
+The `NList` class allows the use of indexing through `operator[](const int* index)`. Passing an index to this function will return the data stored at that position in the list. The list uses a standard indexing system starting with index 0. Note that by default, indexing is *disabled*, and must be manually set on in order to use functions listed in [Section 3](#section-3---functions-with-preconditions). To enable indexing, call the void function `NList::enableIndexing()`. 
 
 ### Performance and Efficiency with Indexing
 
@@ -85,12 +85,12 @@ SortDescending  | sort the list in descending order               | boolean
 
 ### Section 3 - Functions with preconditions
 
-These functions require that indexing is enabled on your list. By default, the list does not use indexing, so it must be enabled by calling `enableIndexing`. These functions will throw an error if indexing is disabled. 
+These functions require that indexing is enabled on your list. By default, the list does not use indexing, so it must be enabled by calling `NList::enableIndexing()`. These functions will throw an error if indexing is disabled. 
 
 Function        | Description    				  | Return type
 -------------   | ----------------------------------------------- |------------
 at              | returns the object stored at passed index	  | T
-operator[]      | exact same behavior as the at function          | T 
+operator[]      | returns the object stored at passed index       | T 
 
 
 ## Defining Numeric Classes
@@ -108,41 +108,63 @@ public:
 	static Fraction is_specialized() { return true; };	// must return true
 };
 ```
-Once this code has been included in your class header, the functions listed in [Section 2](#section-2---functions-with-specifications) become available. To see an example of this template in use, refrence `DLinkedList/LinkedList/ListVS/Fraction.hpp`. 
+Once this code has been included in your class header, the functions listed in [Section 2](#section-2---functions-with-specifications) become available. To see an example of this template in use, refrence [the fraction class](https://github.com/CBR0MS/DLinkedList/blob/master/LinkedList/NList%20Files/Fraction.hpp). 
+
+Note that numeric class limits are needed for `NList` to sort and display the entire list more efficiently. Providing limits unlocks this functionality, but does not slow down any other processes. 
 
 
 ## Speed and Efficiency 
 
-This List function is designed to be efficient, faster than the Vector and List classes from the C++ standard library. Here is a comparison of the three classes and the speeds at which their common functions execute. In this output, `List` refers the linked list class from this repo, `std List` is from the C++ library, and `Vector` also comes from the library. 
+This List function is designed to be efficient, faster than the Vector and List classes from the C++ standard library. Here is a sample comparison of the three classes and the speeds at which their common functions execute. 
 
 ```
-All times measured in mircoseconds...
+All times measured in mircoseconds...Lower is better...
 Indexing is enabled on the linked list...
 
 TEST 1: push_back 100 integer objects
-List:           48 µs
-std List:       274 µs
-Vector:         174 µs
+NList:           48 µs
+std::List:       274 µs
+std::Vector:     174 µs
 
 TEST 2: pop_back 50 integer objects
-List:           3 µs
-std List:       343 µs
-Vector:         54 µs
+NList:           3 µs
+std::List:       343 µs
+std::Vector:     54 µs
 
 TEST 3: push_front 100 integer objects
-List:           118 µs
-std List:       292 µs
-Vector:         N/A
+NList:           118 µs
+std::List:       292 µs
+std::Vector:     N/A
 
 TEST 4: pop_front 50 integer objects
-List:           48 µs
-std List:       335 µs
-Vector:         N/A
+NList:           48 µs
+std::List:       335 µs
+std::Vector:     N/A
 ```
 
-This test file can be found in this repo at `LinkedList/List/List/TimeTestingList.cpp`. Note that indexing is enabled on the linked list, which does slow it down, and without it the speeds are even lower. 
+Find this test file [here](https://github.com/CBR0MS/DLinkedList/blob/master/LinkedList/NList%20Files/TESTM_NListTime.cpp). Note that during testing, indexing was enabled on NList.
 
-## Further Customization
+## Files
 
-If you wish to add more to your class' limits template, I recommend that you reference [this helpful resource from cplusplus.com]
-(http://www.cplusplus.com/reference/limits/numeric_limits/). Any additional functions should be added to the List class located at  `LinkedList/List/List/List.hpp`. The layout of the file is a standard template, with function declarations at the top and definitions below; define any new functions in this same manner. 
+```
+/DLinkedList/
+|  
+|--/LinkedList/
+|    |    
+|    |--/ListVSProj/                # full visual studio project
+|    |    | ...
+|    |    
+|    |--/ListXCProj/                # full Xcode project
+|    |    | ...
+|    |     
+|    |--/NListFiles/
+|    |     |
+|    |     |--Fraction.cpp          # example class to be stored in NList
+|    |     |--Fraction.hpp          # example class to be stored in NList
+|    |     |--NList.hpp             # NList full class template 
+|    |     |--TESTM_NListTime.cpp   # a few tests to run on NList
+|
+|--LICENSE 
+|--README.md
+
+```
